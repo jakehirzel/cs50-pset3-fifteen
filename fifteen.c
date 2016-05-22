@@ -197,7 +197,13 @@ void draw(void)
             {
                 printf(" __ ");
             }
-
+            
+            // Swap 1 & 2 when odd number of tiles
+            else if (d % 2 == 0 && i == d - 1 && (j == d - 2 || j == d - 3))
+            {
+                printf(" XX ");
+            }
+            
             // Otherwise print the init() values
             else
             {
