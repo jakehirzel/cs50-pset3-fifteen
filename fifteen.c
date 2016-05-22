@@ -170,9 +170,20 @@ void init()
         // Fill descending values of k into the j level of the array
         while (j < d && k > 0)
         {
-            board[i][j] = k;
-            j++;
-            k--;
+            // Swap 1 & 2 when odd number of tiles (i.e. d is even)
+            if (d % 2 == 0 && k == 2)
+            {
+                board[i][j] = 1;
+                board[i][j + 1] = 2;
+                j = j + 2;
+                k = 0;
+            }
+            else
+            {
+                board[i][j] = k;
+                j++;
+                k--;
+            }
         }
         
         // Handle the special case of k == 0 to allow for eventual underscores
@@ -196,12 +207,6 @@ void draw(void)
             if (board[i][j] == 95)
             {
                 printf(" __ ");
-            }
-            
-            // Swap 1 & 2 when odd number of tiles
-            else if (d % 2 == 0 && i == d - 1 && (j == d - 2 || j == d - 3))
-            {
-                printf(" XX ");
             }
             
             // Otherwise print the init() values
