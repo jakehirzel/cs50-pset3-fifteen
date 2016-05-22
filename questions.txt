@@ -3,7 +3,7 @@ questions.txt
 Computer Science 50
 Problem Set 3
 
-0. TODO
-1. TODO
-2. TODO
-3. TODO
+0. The framework allows for any whole number board size between 3x3 and 9x9.
+1. The game's board is represented by a two dimensional integer array.
+2. The greet() function is called to greet the player at game's start.
+3. The init(), draw(), move(), and won() functions still need to be implemented.

@@ -1,3 +1,4 @@
+
 /**
  * fifteen.c
  *
@@ -157,9 +158,23 @@ void greet(void)
  * Initializes the game's board with tiles numbered 1 through d*d - 1
  * (i.e., fills 2D array with values but does not actually print them).  
  */
-void init(void)
+void init()
 {
-    // TODO
+    // Fill the board by rows (i) and columns (j) with d^2 numbers (k)
+    for (int i = 0, j = 0, k = (d * d - 1); i < d; i++)
+    {
+        j = 0;
+        while (j < d && k > 0)
+        {
+            board[i][j] = k;
+            j++;
+            k--;
+        }
+        if (k == 0)
+        {
+            board[i][j] = 95;
+        }
+    }
 }
 
 /**
