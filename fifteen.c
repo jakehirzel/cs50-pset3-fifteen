@@ -175,7 +175,7 @@ void init()
             k--;
         }
         
-        // Handle the special case of k == 0 to allow for eventual _ (ASCII 95)
+        // Handle the special case of k == 0 to allow for eventual underscores
         if (k == 0)
         {
             board[i][j] = 95;
@@ -188,7 +188,24 @@ void init()
  */
 void draw(void)
 {
-    // TODO
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            // Replace 95 with underscores
+            if (board[i][j] == 95)
+            {
+                printf(" __ ");
+            }
+
+            // Otherwise print the init() values
+            else
+            {
+                printf(" %2d ", board[i][j]);
+            }
+        }
+        printf("\n\n");
+    }
 }
 
 /**
