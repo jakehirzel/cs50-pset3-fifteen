@@ -163,13 +163,19 @@ void init()
     // Fill the board by rows (i) and columns (j) with d^2 numbers (k)
     for (int i = 0, j = 0, k = (d * d - 1); i < d; i++)
     {
+        
+        // Reset j to index 0 for each new row
         j = 0;
+        
+        // Fill descending values of k into the j level of the array
         while (j < d && k > 0)
         {
             board[i][j] = k;
             j++;
             k--;
         }
+        
+        // Handle the special case of k == 0 to allow for eventual _ (ASCII 95)
         if (k == 0)
         {
             board[i][j] = 95;
