@@ -281,6 +281,67 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
+    // Don't bother running this if 1 isn't in the right spot
+    if (board[0][0] == 1)
+    {
+        // Declare counter k, initialize to 1
+        int k = 1;
+        
+        // Iterate up and check for sequential order 
+        while (k < d * d - 1)
+        {
+            for (int i = 0; i < d; i++)
+            {
+                for (int j = 0; j < d; j++)
+                {
+                    if (board[i][j] == k)
+                    {
+                        k++;
+                    }
+                }
+                
+            }
+        }
+        
+        // If you make it all the way through the numbers, then:
+        while (k == d * d - 1)
+        {
+            if (board[d][d] == 95)
+            {
+                return true;
+            }
+        }
+    }
+    
+/*
+for (int i = d - 1, k = (d * d - 1); i >=0; i--)
+    {
+        for (int j = d - 1; j >= 0; j--)
+        {
+            if (i == d - 1 && j == d - 1)
+            {
+                if (board[i][j] == 95)
+                {
+                    continue;
+                }
+            }
+            if (i == 0 && j == 0)
+            {
+                if (board[i][j] == 1)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (board[i][j] == k)
+                {
+                    k--;
+                }
+            }
+        }
+    }
+*/
+
     return false;
 }
