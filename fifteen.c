@@ -199,7 +199,7 @@ void init()
         // Handle the special case of k == 0 to allow for eventual underscores
         if (k == 0)
         {
-            board[i][j] = 95;
+            board[i][j] = 0;
         }
     }
 }
@@ -214,7 +214,7 @@ void draw(void)
         for (int j = 0; j < d; j++)
         {
             // Replace 95 with underscores
-            if (board[i][j] == 95)
+            if (board[i][j] == 0)
             {
                 printf(" __ ");
             }
@@ -250,7 +250,7 @@ bool move(int tile)
                     {
                         // swap tiles, update blank_coords & return true
                         board[blank_coords[0]][blank_coords[1]] = tile;
-                        board[i][j] = 95;
+                        board[i][j] = 0;
                         blank_coords[0] = i;
                         blank_coords[1] = j;
                         return true;
@@ -263,7 +263,7 @@ bool move(int tile)
                     if (i == blank_coords[0] + 1 || i == blank_coords[0] - 1)
                     {
                         board[blank_coords[0]][blank_coords[1]] = tile;
-                        board[i][j] = 95;
+                        board[i][j] = 0;
                         blank_coords[0] = i;
                         blank_coords[1] = j;
                         return true;
@@ -306,76 +306,13 @@ bool won(void)
         // If the above makes it through all the numbers then:
         if (k == d * d)
         {
-            if (board[d - 1][d - 1] == 95)
-            {
-                return true;
-            }
-        }
-    }
-    
-/*
-
-        // Iterate up and check for sequential order 
-        while (k < d * d - 1)
-        {
-            for (int i = 0; i < d; i++)
-            {
-                for (int j = 0; j < d; j++)
-                {
-                    if (board[i][j] == k)
-                    {
-                        k++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        
-        // If you make it all the way through the numbers, then:
-        while (k == d * d - 1)
-        {
-            if (board[d][d] == 95)
+            if (board[d - 1][d - 1] == 0)
             {
                 return true;
             }
         }
     }
 
-
-
-
-
-for (int i = d - 1, k = (d * d - 1); i >=0; i--)
-    {
-        for (int j = d - 1; j >= 0; j--)
-        {
-            if (i == d - 1 && j == d - 1)
-            {
-                if (board[i][j] == 95)
-                {
-                    continue;
-                }
-            }
-            if (i == 0 && j == 0)
-            {
-                if (board[i][j] == 1)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (board[i][j] == k)
-                {
-                    k--;
-                }
-            }
-        }
-    }
-*/
-
+    // Return to the game if nothing above results in true
     return false;
 }
