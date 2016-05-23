@@ -128,11 +128,11 @@ int main(int argc, string argv[])
         if (!move(tile))
         {
             printf("\nIllegal move.\n");
-            usleep(999999);
+            usleep(300000);
         }
 
         // sleep thread for animation's sake
-        usleep(999999);
+        usleep(600000);
     }
     
     // close log
@@ -158,7 +158,7 @@ void greet(void)
 {
     clear();
     printf("WELCOME TO GAME OF FIFTEEN\n");
-    usleep(1000000);
+    usleep(900000);
 }
 
 /**
@@ -237,26 +237,38 @@ bool move(int tile)
 {
     for (int i = 0; i < d; i++)
     {
-        // Find board coordinates of value of title
+        // Find board coordinates of value of tile
         for (int j = 0; j < d; j++)
         {
-            if ( (board[i][j] == tile) && ( (i == blank_coords[0] && j == (blank_coords[1] + 1 || blank_coords[1] - 1)) || (i == (blank_coords[0] + 1 || blank_coords[0] - 1) && j == blank_coords[1]) ) )
+            if (board[i][j] == tile)
             {
-                // TEST
-                printf("%i, %i, %i, %i", i, j, blank_coords[0], blank_coords[1]);
-                printf("\n");
-                
-                // swap tiles, update blank_coords & return true
-                board[blank_coords[0]][blank_coords[1]] = tile;
-                board[i][j] = 95;
-                blank_coords[0] = i;
-                blank_coords[1] = j;
-                
-               // TEST
-                printf("%i, %i, %i, %i", i, j, blank_coords[0], blank_coords[1]);
-                printf("\n");
-                
-                return true;
+                // tile and blank in same row?
+                if (i == blank_coords[0])
+                {
+                    // is tile one to the left or right of blank?
+                    if (j == blank_coords[1] + 1 || j == blank_coords[1] - 1)
+                    {
+                        // swap tiles, update blank_coords & return true
+                        board[blank_coords[0]][blank_coords[1]] = tile;
+                        board[i][j] = 95;
+                        blank_coords[0] = i;
+                        blank_coords[1] = j;
+                        return true;
+                    }
+                }
+                // tile and blank in same column?
+                if (j == blank_coords[1])
+                {
+                    // is the tile one above or below blank?
+                    if (i == blank_coords[0] + 1 || i == blank_coords[0] - 1)
+                    {
+                        board[blank_coords[0]][blank_coords[1]] = tile;
+                        board[i][j] = 95;
+                        blank_coords[0] = i;
+                        blank_coords[1] = j;
+                        return true;
+                    }
+                }
             }
         }
     }
